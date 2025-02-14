@@ -2,26 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+ transition: all 0s 5000s;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.contains{
+  max-width: 1600px;
+  padding: 0 15px;
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.cstm-height{
+height: calc(100vh - 80px);
 }
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.notitle::file-selector-button{
+ background: green;
 }
