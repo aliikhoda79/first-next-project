@@ -3,6 +3,7 @@ import User from "../../../../models/Users";
 import { parse } from "path";
 import { NextResponse } from "next/server";
 import { hashPassword } from "../../../../utils/auth";
+import { z } from "zod";
 
 export async function GET(req) {
   try {

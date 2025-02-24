@@ -12,13 +12,12 @@ const LatestProducts = () => {
             .then((res) => res.json())
             .then((products) => {
               setNewBlogs(products.slice(0, 4));
+              console.log(newProducts)
             })
             .catch((err) => console.log("problem fetching products",err));
         }, []);
         
-        useEffect(() => {
-          console.log(newProducts);
-        }, [newProducts]);
+  
     
   return (
     <div className="mt-[80px] ">

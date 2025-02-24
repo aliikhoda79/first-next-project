@@ -4,10 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const NewProduct = () => {
-  const [fileURLs, setFileURLs] = useState([]);
   const { register, handleSubmit, setValue } = useForm();
   const onSubmit =async (data) => {
-    data.fileURLs = fileURLs;
+    
     console.log(data)
     const res=await fetch('/api/productsAPI',{
       method:'POST',
@@ -46,7 +45,7 @@ const NewProduct = () => {
         urls.push(fr.result);
         setValue("productImages", urls);
       };
-      setFileURLs(urls);
+    
       fr.readAsDataURL(file[i]);
     }
   };
@@ -55,7 +54,8 @@ const NewProduct = () => {
       <div>new product</div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mb-[70px] border-emerald-300 rounded-xl border flex gap-2 bg-gray-700 max-md:flex-col p-3 flex-wrap  text-white md:p-4"
+        className="mb-[70px] border-emerald-300 rounded-xl border flex gap-2 bg-gray-700 max-md:flex-col p-3 
+        flex-wrap  text-white md:p-4"
       >
         <input
           className="border p-2   border-emerald-200 rounded bg-white/0 "
@@ -94,8 +94,10 @@ const NewProduct = () => {
           {...register("price")}
         />
 
-        <div className="border flex gap-2 items-center p-2 rounded-lg bg-white/0">
-          size :
+        <div className="border flex  items-center gap-1 p-1 rounded-lg bg-white/0">
+          :size
+          <br />
+          <br />
           <label className="" htmlFor="small">
             small
           </label>
@@ -118,7 +120,7 @@ const NewProduct = () => {
         </div>
 
         <input
-          className="p-2 border text-[12px] border-emerald-200 rounded-lg text-white"
+          className="p-2 border text-[12px] border-emerald-200 w-[120px] rounded-lg text-white"
           type="file"
           multiple
           onChange={urlHandler}

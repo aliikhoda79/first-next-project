@@ -1,8 +1,6 @@
 import { getServerSession } from "next-auth"
 import { authOptions } from "../api/auth/[...nextauth]/route"
-
 import { redirect } from "next/navigation"
-import Header from "../../components/Header"
 import Dashboard from "../../components/dashboardComponents/Dashboard"
 export const metaData={
     title:'dashboard',
@@ -18,7 +16,7 @@ export default async function dashboardLayout({children}){
     if (!session) redirect('/signIn')
    
      return (
-            <main style={{color:`${textColor}`}} className={`max-w-[1600px]  mx-auto pt-[80px] ${mainColor}  min-h-[100vh]`}>
+            <main style={{color:`${textColor}`}} className={`max-w-[1600px] mx-auto pt-[80px] ${mainColor} min-h-[100vh]`}>
                 <Dashboard session={session}>
                     {children}
                     {/* این چیلدرن شامل هر فایل page.js ای است که فراخوانده میشه */}

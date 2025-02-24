@@ -48,3 +48,38 @@ export async function DELETE(req) {
     );
   }
 }
+
+export async function PATCH(req){
+  try {
+    await connectDB()
+    const {productName,
+      category,
+      productId,
+      description,
+      productColor,
+      productBrand,
+      productSize,
+      price,
+      productImages}=await req.json()
+      const product=await Product.findById(productId)
+      product.productName =productName
+      product.category =category
+      product.description =description
+      product.productColor =productColor
+      product.productBrand =productBrand
+      product.productSize =productSize
+      product.price =price
+      product.productImages =productImages
+      console.log('updated product',product)
+      try {
+        await product.save();
+        console.log("product edited");
+      } catch (err) {
+        console.log("err happened", err);
+      }
+      return NextResponse.json({message:'log from editUser'})
+  } catch (error) {
+    return NextResponse.json({message:`something wrong with the server :${error}`},{status:500})
+  }
+}
+
