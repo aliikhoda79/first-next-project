@@ -9,7 +9,7 @@ export async function POST(req) {
     await connectDB();
     //2. fetch data from request
     const data = await req.json();
-    const { blogIntro, blogTitle, blogBody, blogConclusion, blogImage1 } = data;
+    const { blogIntro, blogTitle, blogBody, blogConclusion, blogImages } = data;
     //3. check necessary fields
     if (!blogIntro || !blogTitle) {
       return NextResponse.json(
@@ -21,7 +21,7 @@ export async function POST(req) {
     const newBlog = await Blog.create({
       blogTitle,
       blogIntro,
-      blogImage1,
+      blogImages,
       blogBody,
       blogConclusion
     });

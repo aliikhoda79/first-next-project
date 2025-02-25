@@ -12,6 +12,8 @@ export async function GET(req) {
     const parsedUrl = parse(req.url);
     const blogId= parsedUrl.name
     const blog = await Blog.findById(blogId)
+    if (!blog) return NextResponse.json({ blog }, { status: 404 });
+
     return NextResponse.json({ blog }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "not logged" }, { status: 500 });

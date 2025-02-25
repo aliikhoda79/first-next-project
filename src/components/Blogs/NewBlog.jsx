@@ -5,10 +5,10 @@ import { useState } from "react";
 const NewBlog = () => {
   const [form, setForm] = useState({
     blogTitle: "",
-    blogImage1: '',
+    blogImages: [],
     blogIntro: "",
     blogBody: "",
-    blogImage2: [],
+    
     blogConclusion: ""
   });
   const [src, setSrc] = useState(null);
@@ -38,11 +38,10 @@ const NewBlog = () => {
       method: "POST",
       body: JSON.stringify({
         blogTitle: form.blogTitle,
-        blogImage1: form.blogImage1,
+        blogImages: form.blogImages,
         blogIntro: form.blogIntro,
         blogBody: form.blogBody,
-        blogImage2: form.blogImage2,
-        blogConclusion: form.blogConclusion
+        blogConclusion:form.blogConclusion
       }),
       headers:{'Content-type':'application/json'}
     });
@@ -64,8 +63,9 @@ const NewBlog = () => {
         <input
           className="p-2 border text-[12px] border-emerald-200 rounded-lg text-white"
           type="file"
+          multiple
           onChange={urlHandler}
-          name="blogImage1"
+          name="blogImages"
         />
         <input
           className="border p-2 transition-all  border-emerald-200 rounded bg-white/0"
@@ -83,13 +83,7 @@ const NewBlog = () => {
           onChange={formHandler}
           name="blogBody"
         />
-        <input
-          className="p-2 border text-[12px] border-emerald-200 rounded-lg text-white"
-          
-          type="file"
-          onChange={urlHandler}
-          name="blogImage2"
-        />
+       
         <input
           className="border p-2 transition-all  border-emerald-200 rounded bg-white/0"
           type="text"

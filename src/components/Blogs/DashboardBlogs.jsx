@@ -7,7 +7,7 @@ const DashboardBlogs = ({blogs}) => {
     <div className="flex flex-col ">
       <Link className="bg-cyan-600  w-fit  text-white rounded-md p-2 mt-2" href={'/dashboard/blogs/newBlog'}>new blog</Link>
       <div className=" overflow-y-auto h-[700px] grid grid-cols-2 md:grid-cols-3  pt-6  gap-6">
-      {blogs.map((b,i)=>(<Link href={`/blogs/${b._id}`} className="shadow-lg shadow-slate-900/15 h-[200px] hover:scale-105 transition-all ease-linear group md:min-h-[380px] md:max-w-[90%] relative overflow-hidden hover:rounded-lg" key={i}>
+      {blogs.map((b,i)=>(<Link href={`/dashboard/blogs/${b._id}`} className="shadow-lg shadow-slate-900/15 h-[200px] hover:scale-105 transition-all ease-linear group md:min-h-[380px] md:max-w-[90%] relative overflow-hidden hover:rounded-lg" key={i}>
       <div className="h-2/3 overflow-hidden ">
         <Image className=" object-cover group-hover:blur-0 group-hover:scale-105 transition-all ease-linear blur-sm" src={pic4} alt="aa"></Image>
       </div>

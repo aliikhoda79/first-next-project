@@ -5,8 +5,9 @@ const blogSchema = new Schema({
     type: String,
     required: true
   },
-  blogImage1: {
-    type: String
+  blogImages: {
+    type: Array
+    
   },
   blogIntro: {
     type: String,
