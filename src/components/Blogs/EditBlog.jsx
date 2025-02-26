@@ -3,9 +3,10 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const EditBlog = ({ blog }) => {
-  const [fileUrl,setFileUrls]=useState([])
+  
   const [editorOpen, setEditorOpen] = useState(false);
   const [form, setForm] = useState({
+    blogId:blog._id,
     blogTitle: blog.blogTitle,
     blogImages: blog.images,
     blogIntro: blog.blogIntro,
@@ -21,24 +22,31 @@ const EditBlog = ({ blog }) => {
       fr.onload=()=>{
         console.log(fr.result)
         url.push(fr.result)
-        setFileUrls(url)
+        form.blogImages=url
       }
       fr.readAsDataURL(files[i])
     }
    }
-  const submitHandler=(e)=>{
-    form.blogImages=fileUrl
+  const submitHandler=async (e)=>{
     e.preventDefault()
     const name = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [name]: value });
+  }
+  const editBlogHandler =async(e)=>{
+    e.preventDefault()
     console.log(form);
-    
+    const res=await fetch(`http://localhost:3000/api/blogsAPI/${blog._id}`,{
+      method:'PATCH',
+      body:JSON.stringify(form),
+    headers:{'Content-type':'application/json'}      
+    })
+    console.log(res.status)
   }
   return (
     <div className="relative">
       <div
-        className={`absolute bg-black/70  transition-all ease-linear w-full overflow-hidden ${
+        className={`absolute bg-slate-950/70  transition-all ease-linear w-full overflow-hidden ${
           editorOpen ? "h-[700px]" : "h-[85px]"
         }`}
       >
@@ -96,15 +104,14 @@ const EditBlog = ({ blog }) => {
           <input
             className="w-[130px] md:w-full flex flex-wrap"
             name="blogImages"
-            
               onChange={urlHandler}
             type="file"
             multiple
           />
-          <button className="border p-2 rounded-lg bg-teal-700">submit</button>
+          <button onClick={editBlogHandler} className="border p-2 rounded-lg bg-teal-700">submit</button>
         </form>
       </div>
-      <div className="overflow-y-auto pt-[95px] h-[500px] md:h-[700px] text-white ">
+      <div className="overflow-y-auto pt-[95px] h-[670px] md:h-[800px] text-white ">
         <div className=" flex gap-3">
           pictures:
           {blog.blogImages.map((im, index) => (

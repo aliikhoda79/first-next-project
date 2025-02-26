@@ -54,3 +54,28 @@ export async function DELETE(req) {
     );
   }
 }
+export async function PATCH(req){
+  try {
+    await connectDB()
+    const {blogId,blogTitle,blogImages,blogIntro,blogBody,blogConclusion} =await req.json()
+    const blog =await Blog.findById(blogId)
+    
+    if (!blog) return NextResponse.json({message:'no such user'},{status:404}) 
+
+      blog.blogTitle =blogTitle
+      blog.blogImages =blogImages
+      blog.blogIntro=blogIntro
+      blog.blogBody=blogBody
+      blog.blogConclusion=blogConclusion
+      try {
+        await blog.save();
+        console.log("blog edited");
+      } catch (err) {
+        console.log("err happened", err);
+      }
+    return NextResponse.json({message:'blog edit was successful'},{status:201})
+  } catch (error) {
+    return NextResponse.json({message:'something wrong with server',error},{status:500})
+    
+  }
+}

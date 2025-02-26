@@ -42,7 +42,7 @@ const Header = () => {
       </Link>
       <Navbar />
 
-      {status === "authenticated" ? (
+      {status === "authenticated" && (
         <div className="mr-auto bg-emerald-700 rounded-lg ">
           {name && (
             <Link
@@ -53,13 +53,24 @@ const Header = () => {
             </Link>
           )}
         </div>
-      ) : (
+      )} 
+      {status ==="unauthenticated" &&(
         <button className="mr-auto rounded-xl border">
           <Link
             className="inline-block text-sm p-2 md:py-2 md:px-4 w-full h-full"
             href={"/signIn"}
           >
             sign in / login
+          </Link>
+        </button>
+      )}
+      {status ==="loading" &&(
+        <button className="mr-auto rounded-xl border">
+          <Link
+            className="inline-block text-sm p-2 md:py-2 md:px-4 w-full h-full"
+            href={"/signIn"}
+          >
+            loading
           </Link>
         </button>
       )}
