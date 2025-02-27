@@ -12,7 +12,7 @@ const ProductsPage = ({products}) => {
       <h1 className="w-full text-center font-extrabold text-4xl"> Shop</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-3  mt-6 gap-8">
-      {products.map((p,i)=>(<Link href={`/shop/${p._id}`} className="shadow-lg shadow-slate-900/15 h-[350px] relative hover:scale-105 transition-all  ease-linear group md:h-[380px]  overflow-hidden hover:rounded-lg" key={i}>
+      {products.length==0?<div className="flex items-center text-[26px] justify-center w-full h-full "><h1>sorry :( there is no blog yet</h1></div> :products.map((p,i)=>(<Link href={`/shop/${p._id}`} className="shadow-lg shadow-slate-900/15 h-[350px] relative hover:scale-105 transition-all  ease-linear group md:h-[380px]  overflow-hidden hover:rounded-lg" key={i}>
       <div className="h-2/3  overflow-hidden ">
         <Image className="h-full object-contain  group-hover:blur-0 group-hover:scale-105 transition-all ease-linear blur-sm" src={pic4} alt="aa"></Image>
       </div>

@@ -12,7 +12,7 @@ const DashboardProducts = ({ products }) => {
         new product
       </Link>
       <div className="grid text-white  md:grid-cols-3 justify-items-center pt-6 max-md:mb-[100px] overflow-y-auto h-[700px] mt-4 gap-8">
-        {products.map((p, i) => (
+        {products.length==0?<div className="flex items-center text-white text-[26px] justify-center w-full h-full "><h1>sorry :( there is no item yet</h1></div> :products.map((p, i) => (
           <Link
             href={`/dashboard/products/${p._id}`}
             className="shadow-lg shadow-slate-900/15 h-[330px] relative hover:scale-105 transition-all ease-linear group md:h-[320px] md:w-[270px] w-[280px] rounded-md overflow-hidden hover:rounded-lg"

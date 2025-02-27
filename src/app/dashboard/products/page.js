@@ -1,8 +1,9 @@
 import React from 'react'
 import DashboardProducts from '../../../components/shop/DashboardProducts'
 const page =async () => {
-    const res =await fetch('http://localhost:3000/api/productsAPI')
+    const res =await fetch('http://localhost:3000/api/productsAPI',{cache:'no-store'})
   const products =await res.json()
+  console.log('from page file',products)
   
   return (
     <DashboardProducts products={products}/>

@@ -11,7 +11,7 @@ const Blogs = ({blogs}) => {
     <main className="mt-[100px] contains">
       <h1 className="w-full text-center font-extrabold text-4xl"> Blogs</h1>
       <div className="grid grid-cols-2 md:grid-cols-3  mt-6 gap-8">
-      {blogs.map((b,i)=>(<Link href={`/blogs/${b._id}`} className="shadow-lg shadow-slate-900/15 h-[200px] hover:scale-105 transition-all ease-linear group md:min-h-[380px] relative overflow-hidden hover:rounded-lg" key={i}>
+      {blogs.length==0?<div className="flex items-center text-[26px] justify-center w-full h-full "><h1>sorry :( there is no item yet</h1></div> :blogs.map((b,i)=>(<Link href={`/blogs/${b._id}`} className="shadow-lg shadow-slate-900/15 h-[200px] hover:scale-105 transition-all ease-linear group md:min-h-[380px] relative overflow-hidden hover:rounded-lg" key={i}>
       <div className="h-2/3 overflow-hidden ">
         <Image className=" object-cover group-hover:blur-0 group-hover:scale-105 transition-all ease-linear blur-sm" src={pic4} alt="aa"></Image>
       </div>

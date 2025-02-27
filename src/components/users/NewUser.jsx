@@ -42,7 +42,7 @@ const NewUser = () => {
     console.log("data fetched successfully", data);
     if (response.status === 201) {
       setSuccess(data.user);
-      setTimeout(() => setSuccess(null), 5000);
+      setTimeout(() => setSuccess(null), 3000);
     }
   };
 
@@ -117,7 +117,7 @@ const NewUser = () => {
         </button>
       </form>
       {success && (
-        <div className="transition bg-white border-green-500 text-green-700 absolute flex justify-center items-center ">
+        <div className="transition-all bg-white border-green-500 text-green-700 absolute flex justify-center items-center ">
           <p>
             <strong>User added:</strong>
           </p>
