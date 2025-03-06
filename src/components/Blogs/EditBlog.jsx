@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const EditBlog = ({ blog }) => {
-  
+const router =useRouter()  
   const [editorOpen, setEditorOpen] = useState(false);
   const [form, setForm] = useState({
     blogId:blog._id,
@@ -43,6 +44,14 @@ const EditBlog = ({ blog }) => {
     })
     console.log(res.status)
   }
+  const deleteBlog= async ()=>{
+    const res =await fetch(`http://localhost:3000/api/blogsAPI/${blog._id}`,{method:'DELETE'})
+    console.log(res)
+    if(res.status===201){
+  
+      setTimeout(()=>router.push('/dashboard/blogs'),3000)
+    }
+  }
   return (
     <div className="relative">
       <div
@@ -58,7 +67,7 @@ const EditBlog = ({ blog }) => {
           >
             edit
           </button>
-          <button className="py-1 rounded-lg text-white px-3 bg-red-700 border">
+          <button onClick={deleteBlog} className="py-1 rounded-lg text-white px-3 bg-red-700 border">
             delete
           </button>
         </div>

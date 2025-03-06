@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-const EditProduct = ({ product, }) => {
-  
+const EditProduct = ({ product }) => {
+  const router =useRouter()
   
   const [editorOpen, setEditorOpen] = useState(false);
  const {register,handleSubmit,setValue}= useForm({defaultValues:{
@@ -47,6 +48,14 @@ const EditProduct = ({ product, }) => {
   })
  })
 }
+const deleteProduct= async ()=>{
+  const res =await fetch(`/api/productsAPI/${product._id}`,{method:'DELETE'})
+  console.log(res)
+  if(res.status===201){
+
+    setTimeout(()=>router.push('/dashboard/products'),3000)
+  }
+}
   return (
     <div className="relative">
       <div
@@ -60,7 +69,7 @@ const EditProduct = ({ product, }) => {
           >
             edit
           </button>
-          <button className="py-1 rounded-lg text-white px-3 bg-red-700 border">
+          <button onClick={deleteProduct} className="py-1 rounded-lg text-white px-3 bg-red-700 border">
             delete
           </button>
         </div>

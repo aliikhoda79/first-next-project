@@ -10,7 +10,7 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const { email, pass } = credentials;
+        const { email, pass,phoneNumber } = credentials;
         //connecting db
         try {
           await connectDB();
@@ -19,27 +19,28 @@ export const authOptions = {
           throw new Error("server connection error");
         }
         //check if password or email is empty
-        if (!email || !pass) {
-          throw new Error("email and password cannot be empty");
+        if (!email || !pass ||!phoneNumber) {
+          throw new Error("fields cannot be empty");
         }
         //find user
-        const user = await User.findOne({ email });
+        const user = await User.findOne(
+          { $or:[{phoneNumber:phoneNumber},{email:email}] });
         // check user existence
         if (!user) {
-          throw new Error("wrong informatin,try again");
+          throw new Error("wrong information,try again");
         }
         //validation check for passwords
         const isValid = await verifyPassword(pass, user.pass);
         console.log(isValid);
         if (!isValid) {
-          throw new Error("wrong values");
+          throw new Error("wrong password");
         }
         const name = [user.name, user.role];
         //is everything ok
         return { email, name };
       }
     })
-  ],
+    ],
   secret: process.env.NEXTAUTH_SECRET
 };
 

@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import useNotif from "../hooks/useNotif";
 const page = () => {
   const router = useRouter();
 
@@ -24,12 +24,13 @@ const page = () => {
   };
   const signUpHandler = async (e) => {
     e.preventDefault();
+
     //pass validation
     if (!form.pass) return setMessage("password cant be empty");
     if (form.pass === form.confirmPass) {
       setMessage("passwords match!!");
       console.log("form", form);
-    } else setMessage("passwords unmatch!!");
+    } else return setMessage("passwords unmatch!!");
     //api call
     const res = await fetch("/api/auth/signUp", {
       method: "POST",
@@ -43,30 +44,33 @@ const page = () => {
       headers: { "Content-Type": "application/json" }
     });
     const data = await res.json();
-    console.log(data);
     if (res.status === 201) {
-      signInHandler();
+      setTimeout(() => signInHandler(), 2000);
     }
+    // else failedNotif()
   };
   const signInHandler = async () => {
-    const res = await signIn("credentials", { email:form.email, pass:form.pass, redirect: false });
+    const res = await signIn("credentials", {
+      email: form.email,
+      pass: form.pass,
+      phoneNumber:form.phoneNumber,
+      redirect: false
+    });
     if (res.error) {
-      console.log(res.error,'SOMETHING BAD HAPPENED')
-      alert("something bad happened");
+      alert(res.error);
     } else {
-      alert("welcome");
-      router.push('/dashboard')
+      router.push("/dashboard");
     }
   };
 
   return (
-    <main className=" min-h-screen flex flex-col">
-      <h1 className="pt-3 font-bold sm:pt-[100px] text-[28px] capitalize text-center">
+    <main className=" h-[100svh]  flex flex-col">
+      <h1 className=" font-bold pt-[80px] text-[28px] capitalize text-center">
         sign up
       </h1>
       <form
         onSubmit={formChangeHandler}
-        className="flex text-[16px] flex-wrap justify-between gap-2 py-6 px-5 mx-auto mt-3 sm:mt-[50px] border-t sm:border border-emerald-300/75 sm:border-b-4 text-emerald-300 min-h-[300px] sm:min-h-[400px]  rounded-3xl sm:w-[500px]"
+        className={`flex text-[16px] flex-wrap justify-between gap-2 py-6 px-5 mx-auto mt-3 sm:mt-[50px] border-t sm:border sm:border-b-4 relative text-emerald-300 min-h-[300px] sm:min-h-[400px]  rounded-3xl sm:w-[500px]`}
       >
         <input
           onChange={formChangeHandler}
@@ -97,6 +101,7 @@ const page = () => {
           type="email"
           placeholder="yourEmail@.com"
         />
+
         <input
           name="pass"
           onChange={formChangeHandler}
@@ -118,7 +123,7 @@ const page = () => {
         <input
           onChange={formChangeHandler}
           name="confirmPass"
-          className="bg-transparent  border-white/0 outline-none w-full focus:border-blue-400 border rounded-xl focus:shadow-md focus:shadow-emerald-500 p-3 focus:border-b-2"
+          className="bg-transparent scroll-smooth border-white/0 outline-none w-full focus:border-blue-400 border rounded-xl focus:shadow-md focus:shadow-emerald-500 p-3 focus:border-b-2"
           type="password"
           placeholder="تکرار رمز عبور"
         />

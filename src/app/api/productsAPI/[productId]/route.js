@@ -38,7 +38,7 @@ export async function DELETE(req) {
       console.log("err happened", err);
     }
     return NextResponse.json(
-      { message: "user deleted successfully" },
+      { message: "item deleted successfully" },
       { status: 201 }
     );
   } catch (err) {

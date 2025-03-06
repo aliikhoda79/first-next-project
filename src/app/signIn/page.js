@@ -9,6 +9,7 @@ const page = () => {
 
   const [form, setForm] = useState({
     email: "",
+    phoneNumber: "",
     pass: ""
   });
   const [message, setMessage] = useState("");
@@ -18,13 +19,13 @@ const page = () => {
     const name = e.target.name;
     setForm({ ...form, [name]: value });
   };
-  
 
   const signInHandler = async (e) => {
     e.preventDefault();
     const res = await signIn("credentials", {
       email: form.email,
       pass: form.pass,
+      phoneNumber: form.phoneNumber,
       redirect: false
     });
     if (res.error) {
@@ -33,7 +34,7 @@ const page = () => {
     } else {
       console.log(res);
       alert(`welcome`);
-      router.push('/dashboard')
+      router.push("/dashboard");
     }
   };
 
@@ -86,9 +87,14 @@ const page = () => {
         >
           submit
         </button>
-        
-          <Link className="py-2 px-6 flex justify-center bg-teal-600 rounded-lg text-white mt-6 w-[170px] mx-auto items-center" clas href={"/signup"}>sign up</Link>
-        
+
+        <Link
+          className="py-2 px-6 flex justify-center bg-teal-600 rounded-lg text-white mt-6 w-[170px] mx-auto items-center"
+          clas
+          href={"/signup"}
+        >
+          sign up
+        </Link>
       </form>
     </main>
   );

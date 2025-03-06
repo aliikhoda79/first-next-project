@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const UserEdit = ({ user }) => {
+  const router=useRouter()
   const [form, setForm] = useState({
     role: user.role,
     familyName: user.familyName,
@@ -36,7 +38,14 @@ const UserEdit = ({ user }) => {
     });
     console.log(res);
   };
+  const deleteUser= async ()=>{
+    const res =await fetch(`http://localhost:3000/api/users/${user._id}`,{method:'DELETE'})
+    console.log(res)
+    if(res.status===201){
 
+      setTimeout(()=>router.push('/dashboard/users'),10000)
+    }
+  }
   return (
     <>
       <div
@@ -48,7 +57,13 @@ const UserEdit = ({ user }) => {
           onClick={() => setOpen(!open)}
           className=" rounded-lg bg-slate-50 border p-1 "
         >
-          edit user{" "}
+          edit user
+        </button>
+        <button
+          onClick={deleteUser}
+          className="rounded-lg bg-red-50 mx-2 text-red-600 border-red-500 border p-1 "
+        >
+          delete user
         </button>
         <form
           onSubmit={formChangeHandler}

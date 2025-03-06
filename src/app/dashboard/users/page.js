@@ -1,9 +1,7 @@
 import Link from "next/link";
 
 import UsersPage from "../../../components/users/UsersPage";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+
 async function page() {
   
   

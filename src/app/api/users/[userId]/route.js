@@ -91,21 +91,17 @@ export async function DELETE(req) {
         { status: 404 }
       );
     }
-    
-
-    console.log(`delete ${user} success`);
     try {
       await User.deleteOne(user)
       console.log("user deleted");
+      return NextResponse.json(
+        { message: "user deleted" },
+        { status: 201 }
+      )
     } catch (err) {
       console.log("err happened", err);
     }
-
-
-    return NextResponse.json(
-      { message: "everyting is fine for now" },
-      { status: 201 }
-    );
+    
   } 
   catch (err) {
     return NextResponse.json(

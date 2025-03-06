@@ -3,7 +3,7 @@ import Link from "next/link"
 import { pic4 } from "../../utils/index";
 
 const DashboardBlogs = ({blogs}) => {
-  console.log('blogs component',blogs)  
+  
   return (
     <div className="flex flex-col ">
       <Link className="bg-cyan-600  w-fit  text-white rounded-md p-2 mt-2" href={'/dashboard/blogs/newBlog'}>new blog</Link>
