@@ -1,6 +1,11 @@
 <<<<<<< HEAD
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## a note from developer:
+
+this is a training project,i know its not clean, and i just wanted to educate and try different ways for producing.
+like in editblog and edituser components i tested usestate and pure way of providing new user object ,but in editproduct and creating product you can see useForm hook.
+
 ## Getting Started
 
 First, run the development server:
